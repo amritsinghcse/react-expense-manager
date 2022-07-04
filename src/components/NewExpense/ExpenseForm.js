@@ -16,13 +16,11 @@ const ExpenseForm = (props) => {
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
 
-
     //Not guaranteed to use latest state snapshot, may be outdated if multiple states are scheduled
     // setUserInput({
     //   ...userInput,
     //   eneteredTitle: event.target.value
     // });
-
 
     //Use this approach as this is safer, React schedules state updates
     // setUserInput((prevState) => {
@@ -31,8 +29,6 @@ const ExpenseForm = (props) => {
     //     eneteredTitle: event.target.value
     //   };
     // });
-
-
   };
 
   const amountChangeHandler = (event) => {
@@ -49,7 +45,6 @@ const ExpenseForm = (props) => {
     //     enteredAmount: event.target.value
     //   };
     // });
-
   };
 
   const dateChangeHandler = (event) => {
@@ -66,7 +61,6 @@ const ExpenseForm = (props) => {
     //     eneteredDate: event.target.value
     //   };
     // });
-
   };
 
   const submitHandler = (event) => {
@@ -75,22 +69,25 @@ const ExpenseForm = (props) => {
     const expenseData = {
       title: eneteredTitle,
       amount: enteredAmount,
-      date: new Date(eneteredDate)
+      date: new Date(eneteredDate),
     };
 
     props.onSaveExpenseData(expenseData);
-    setEnteredTitle('');
-    setEnteredAmount('');
-    setEnteredDate('');
-
-  }
+    setEnteredTitle("");
+    setEnteredAmount("");
+    setEnteredDate("");
+  };
 
   return (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" value={eneteredTitle} onChange={titleChangeHandler} />
+          <input
+            type="text"
+            value={eneteredTitle}
+            onChange={titleChangeHandler}
+          />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
@@ -113,6 +110,7 @@ const ExpenseForm = (props) => {
           />
         </div>
         <div className="new-expense__actions">
+          <button type="button" onClick={props.onSetFormHandlerFalse}>Cancel</button>
           <button type="submit">Add Expense</button>
         </div>
       </div>
